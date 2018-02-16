@@ -1,0 +1,33 @@
+package com.walterjwhite.data.pipe.impl;
+
+import com.walterjwhite.data.pipe.api.sink.Sink;
+import com.walterjwhite.data.pipe.api.source.AbstractSinkConfiguration;
+import com.walterjwhite.google.guice.GuiceHelper;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.Consumer;
+
+public class DefaultTeeConsumer implements Consumer, AutoCloseable {
+  protected final Set<Sink> sinks = new HashSet<>();
+
+  public DefaultTeeConsumer(final Set<AbstractSinkConfiguration> sinkConfigurations)
+      throws ClassNotFoundException {
+    super();
+
+    for (final AbstractSinkConfiguration sinkConfiguration : sinkConfigurations) {
+      Sink sink = GuiceHelper.getGuiceInjector().getInstance(sinkConfiguration.getSinkClass());
+      sink.configure(sinkConfiguration);
+      sinks.add(sink);
+    }
+  }
+
+  @Override
+  public void accept(Object o) {
+    for (Sink sink : sinks) sink.accept(o);
+  }
+
+  @Override
+  public void close() throws Exception {
+    for (Sink sink : sinks) sink.close();
+  }
+}
