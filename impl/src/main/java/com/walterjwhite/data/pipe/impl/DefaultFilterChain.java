@@ -2,7 +2,7 @@ package com.walterjwhite.data.pipe.impl;
 
 import com.walterjwhite.data.pipe.api.filter.AbstractFilterConfiguration;
 import com.walterjwhite.data.pipe.api.filter.Filter;
-import com.walterjwhite.google.guice.GuiceHelper;
+import com.walterjwhite.infrastructure.inject.core.helper.ApplicationHelper;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -17,7 +17,9 @@ public class DefaultFilterChain implements Predicate {
 
     for (final AbstractFilterConfiguration filterConfiguration : filterConfigurations) {
       Filter filter =
-          GuiceHelper.getGuiceInjector().getInstance(filterConfiguration.getFilterClass());
+          ApplicationHelper.getApplicationInstance()
+              .getInjector()
+              .getInstance(filterConfiguration.getFilterClass());
       filter.configure(filterConfiguration);
       filters.add(filter);
     }

@@ -2,14 +2,22 @@ package com.walterjwhite.data.pipe.modules.jdbc.copy;
 
 import com.walterjwhite.datastore.api.model.entity.AbstractEntity;
 import java.sql.JDBCType;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+// TODO: apparently this is missing the entity, which means the .equals and .hashCode is incorrect.
+@Data
+@ToString(doNotUseGetters = true)
+@NoArgsConstructor
 public class Column extends AbstractEntity {
   protected String name;
-  protected JDBCType type;
-  protected int size;
-  protected int decimalDigits;
-  protected boolean nullable;
-  protected boolean autoIncrement;
+  @EqualsAndHashCode.Exclude protected JDBCType type;
+  @EqualsAndHashCode.Exclude protected int size;
+  @EqualsAndHashCode.Exclude protected int decimalDigits;
+  @EqualsAndHashCode.Exclude protected boolean nullable;
+  @EqualsAndHashCode.Exclude protected boolean autoIncrement;
 
   public Column(
       String name,
@@ -25,58 +33,6 @@ public class Column extends AbstractEntity {
     this.size = size;
     this.decimalDigits = decimalDigits;
     this.nullable = nullable;
-    this.autoIncrement = autoIncrement;
-  }
-
-  public Column() {
-    super();
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public JDBCType getType() {
-    return type;
-  }
-
-  public void setType(JDBCType type) {
-    this.type = type;
-  }
-
-  public int getSize() {
-    return size;
-  }
-
-  public void setSize(int size) {
-    this.size = size;
-  }
-
-  public int getDecimalDigits() {
-    return decimalDigits;
-  }
-
-  public void setDecimalDigits(int decimalDigits) {
-    this.decimalDigits = decimalDigits;
-  }
-
-  public boolean isNullable() {
-    return nullable;
-  }
-
-  public void setNullable(boolean nullable) {
-    this.nullable = nullable;
-  }
-
-  public boolean isAutoIncrement() {
-    return autoIncrement;
-  }
-
-  public void setAutoIncrement(boolean autoIncrement) {
     this.autoIncrement = autoIncrement;
   }
 }

@@ -6,11 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.NoSuchElementException;
 
 public class JDBCIterator implements Iterator<Object[]>, AutoCloseable {
-  private static final Logger LOGGER = LoggerFactory.getLogger(JDBCIterator.class);
   protected final Connection connection;
   protected final JDBCSourceConfiguration JDBCSourceConfiguration;
 
@@ -24,7 +22,7 @@ public class JDBCIterator implements Iterator<Object[]>, AutoCloseable {
     this.JDBCSourceConfiguration = JDBCSourceConfiguration;
 
     queryStatement =
-        connection.prepareStatement(JDBCSourceConfiguration.getJdbcConfiguration().getQuery());
+        connection.prepareStatement(JDBCSourceConfiguration.getJdbcQueryConfiguration().getQuery());
     prepareQuery();
     resultSet = queryStatement.executeQuery();
   }
@@ -42,6 +40,8 @@ public class JDBCIterator implements Iterator<Object[]>, AutoCloseable {
 
   @Override
   public Object[] next() {
+    if (!hasNext()) throw new NoSuchElementException("No more elements available");
+
     Object[] record = new Object[columnCount];
     for (int i = 0; i < columnCount; i++) {
       try {
@@ -56,19 +56,11 @@ public class JDBCIterator implements Iterator<Object[]>, AutoCloseable {
 
   public void close() throws Exception {
     if (resultSet != null) {
-      try {
-        resultSet.close();
-      } catch (Exception e) {
-        LOGGER.warn("error closing resultset.", e);
-      }
+      resultSet.close();
     }
 
     if (queryStatement != null) {
-      try {
-        queryStatement.close();
-      } catch (Exception e) {
-        LOGGER.warn("error closing queryStatement.", e);
-      }
+      queryStatement.close();
     }
 
     connection.close();

@@ -6,13 +6,9 @@ import com.walterjwhite.index.api.model.query.SearchQuery;
 import com.walterjwhite.index.api.service.IndexSearchService;
 import java.util.Iterator;
 import javax.inject.Inject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 // provides a stream of indexrecords
 public class IndexSource extends AbstractSource<IndexRecord, IndexSourceConfiguration> {
-  private static final Logger LOGGER = LoggerFactory.getLogger(IndexSource.class);
-
   protected final IndexSearchService indexSearchService;
   protected final SearchQuery searchQuery;
   protected int index = 0;
@@ -25,7 +21,7 @@ public class IndexSource extends AbstractSource<IndexRecord, IndexSourceConfigur
     indexSearchService.search(searchQuery);
   }
 
-  public void close() throws Exception {}
+  public void close() {}
 
   /** TODO: For very large result sets, this would be terrible. */
   @Override

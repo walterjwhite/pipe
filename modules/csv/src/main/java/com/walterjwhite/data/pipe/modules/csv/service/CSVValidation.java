@@ -2,6 +2,7 @@ package com.walterjwhite.data.pipe.modules.csv.service;
 
 import java.util.Objects;
 
+// TODO: this is a plugin, it should be moved outside of this project
 public class CSVValidation {
   protected final String filenameKey;
   protected final long count;

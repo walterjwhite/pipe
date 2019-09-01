@@ -6,11 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Similar pipes go together, for example, all of the Apache web server logs or all of the tomcat
  * logs, or database logs.
  */
+@Getter
+@Setter
+// @PersistenceCapable
+@NoArgsConstructor
 @Entity
 public class PipeSessionGroupConfiguration extends AbstractNamedEntity {
   @OneToMany
@@ -26,18 +33,6 @@ public class PipeSessionGroupConfiguration extends AbstractNamedEntity {
   public PipeSessionGroupConfiguration(
       String name, String description, List<DataPipeConfiguration> dataPipeConfigurations) {
     super(name, description);
-    this.dataPipeConfigurations = dataPipeConfigurations;
-  }
-
-  public PipeSessionGroupConfiguration() {
-    super();
-  }
-
-  public List<DataPipeConfiguration> getDataPipeConfigurations() {
-    return dataPipeConfigurations;
-  }
-
-  public void setDataPipeConfigurations(List<DataPipeConfiguration> dataPipeConfigurations) {
     this.dataPipeConfigurations = dataPipeConfigurations;
   }
 }

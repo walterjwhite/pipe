@@ -5,17 +5,12 @@ import com.walterjwhite.pipe.javafx.JavaFXDataSink;
 import com.walterjwhite.pipe.javafx.JavaFXDataSinkConfiguration;
 import java.io.File;
 import java.util.Iterator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Tail a file and render the output to vaadin grid avoid buffering to minimize memory usage
  * configure amount of lines retained to cap memory usage
  */
 public class JavaFXSampleApplicationTailFile {
-  private static final Logger LOGGER =
-      LoggerFactory.getLogger(JavaFXSampleApplicationTailFile.class);
-
   public static void main(final String[] arguments) throws Exception {
     // execute a command such as tailing a file, indefinite runtime
     // tail -f /var/log/messages
@@ -90,8 +85,10 @@ public class JavaFXSampleApplicationTailFile {
           javaFXDataSink.accept(new String[] {next});
         }
       } catch (Exception e) {
-        LOGGER.error("Error", e);
+        handleError(e);
       }
     }
   }
+
+  protected void handleError(Exception e) {}
 }

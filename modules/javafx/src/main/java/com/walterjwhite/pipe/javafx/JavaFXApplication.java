@@ -15,12 +15,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javax.swing.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class JavaFXApplication extends Application {
-  private static final Logger LOGGER = LoggerFactory.getLogger(JavaFXApplication.class);
-
   private static AtomicBoolean started = new AtomicBoolean();
   public static List<JavaFXDataSink> DATA_SINKS = new ArrayList<>();
   private static final JFXPanel panel = new JFXPanel();
@@ -78,13 +74,15 @@ public class JavaFXApplication extends Application {
   }
 
   private static synchronized void doStart(final String[] arguments) {
-    if (!started.get()) {
-      LOGGER.info("starting");
-
+    if (!isStarted()) {
       // initialize guice
       launch(arguments);
 
       started.set(true);
-    } else LOGGER.info("was already started");
+    }
+  }
+
+  private static synchronized boolean isStarted() {
+    return started.get();
   }
 }

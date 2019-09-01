@@ -3,20 +3,16 @@ package com.walterjwhite.data.pipe.modules.jdbc;
 import com.walterjwhite.data.pipe.impl.AbstractSink;
 import com.walterjwhite.data.pipe.modules.jdbc.api.model.JDBCSinkConfiguration;
 import java.sql.SQLException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class JDBCSink extends AbstractSink<Object[], JDBCSinkConfiguration> {
-  private static final Logger LOGGER = LoggerFactory.getLogger(JDBCSink.class);
-
-  protected JDBCAwareContainer jdbcAwareContainer;
+  protected PreparedStatementJDBCAwareContainer preparedStatementJDBCAwareContainer;
   protected int recordsProcessed = 0;
 
   @Override
   protected void doConfigure() {
-    jdbcAwareContainer =
-        new JDBCAwareContainer(
-            sinkConfiguration.getJdbcConfiguration(),
+    preparedStatementJDBCAwareContainer =
+        new PreparedStatementJDBCAwareContainer(
+            sinkConfiguration.getJdbcQueryConfiguration(),
             sinkConfiguration.getRecordsPerUnitOfWork() > 0);
   }
 
@@ -25,15 +21,20 @@ public class JDBCSink extends AbstractSink<Object[], JDBCSinkConfiguration> {
     try {
       for (int i = 0; i < record.length; i++) {
         if (String.class.isInstance(record[i]))
-          jdbcAwareContainer.getPreparedStatement().setString(i, (String) record[i]);
+          preparedStatementJDBCAwareContainer
+              .getPreparedStatement()
+              .setString(i, (String) record[i]);
         if (Integer.class.isInstance(record[i]))
-          jdbcAwareContainer.getPreparedStatement().setInt(i, (Integer) record[i]);
+          preparedStatementJDBCAwareContainer.getPreparedStatement().setInt(i, (Integer) record[i]);
         if (Double.class.isInstance(record[i]))
-          jdbcAwareContainer.getPreparedStatement().setDouble(i, (Double) record[i]);
+          preparedStatementJDBCAwareContainer
+              .getPreparedStatement()
+              .setDouble(i, (Double) record[i]);
         else throw (new IllegalArgumentException("unsupported type"));
       }
     } catch (SQLException e) {
-      LOGGER.warn("Error setting value", e);
+      // LOGGER.warn("Error setting value", e);
+      throw new RuntimeException("Error setting value", e);
     }
 
     recordsProcessed++;
@@ -41,30 +42,22 @@ public class JDBCSink extends AbstractSink<Object[], JDBCSinkConfiguration> {
     if (recordsProcessed > sinkConfiguration.getRecordsPerUnitOfWork()) {
       recordsProcessed = 0;
       try {
-        jdbcAwareContainer.getConnection().commit();
+        preparedStatementJDBCAwareContainer.getConnection().commit();
       } catch (SQLException e) {
-        LOGGER.warn("Error commiting tx", e);
+        // LOGGER.warn("Error commiting tx", e);
+        throw new RuntimeException("Error committing tx", e);
       }
     }
   }
 
-  public void close() {
+  public void close() throws SQLException {
     try {
-      jdbcAwareContainer.getConnection().commit();
+      preparedStatementJDBCAwareContainer.getConnection().commit();
     } catch (SQLException e) {
-      LOGGER.warn("Error commiting tx", e);
+      throw new RuntimeException("Error committing tx", e);
     }
 
-    try {
-      jdbcAwareContainer.getPreparedStatement().close();
-    } catch (SQLException e) {
-      LOGGER.warn("Error closing preparedStatement", e);
-    }
-
-    try {
-      jdbcAwareContainer.getConnection().close();
-    } catch (SQLException e) {
-      LOGGER.warn("Error closing connection", e);
-    }
+    preparedStatementJDBCAwareContainer.getPreparedStatement().close();
+    preparedStatementJDBCAwareContainer.getConnection().close();
   }
 }

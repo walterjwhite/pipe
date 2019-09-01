@@ -21,7 +21,7 @@ public class TestTransform {
     GuiceHelper.addModules(
         new DataPipeModule(), new CSVDataPipeModule(), new ApacheCommonsCSVModule());
     GuiceHelper.setup();
-    injector = GuiceHelper.getGuiceInjector();
+    injector = GuiceHelper.getGuiceApplicationInjector();
   }
 
   @After

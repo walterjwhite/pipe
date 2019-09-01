@@ -7,7 +7,7 @@ source:
       query: SELECT * FROM ORDER
 
       username: orderService
-      password: 234n08
+      password: orders
 
 sink:
   className: com.walterjwhite.vaadin.impl.service.VaadinSink

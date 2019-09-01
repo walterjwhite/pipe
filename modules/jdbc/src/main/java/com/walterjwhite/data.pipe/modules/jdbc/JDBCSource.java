@@ -5,20 +5,18 @@ import com.walterjwhite.data.pipe.modules.jdbc.api.model.JDBCSourceConfiguration
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /** TODO: 1. get the appropriate source connection here 2. get the appropriate source query here */
 public class JDBCSource extends AbstractSource<Object[], JDBCSourceConfiguration> {
-  private static final Logger LOGGER = LoggerFactory.getLogger(JDBCSource.class);
-  protected JDBCAwareContainer jdbcAwareContainer;
+  protected PreparedStatementJDBCAwareContainer preparedStatementJDBCAwareContainer;
   protected ResultSet resultSet;
 
   @Override
   protected void doConfigure() {
-    jdbcAwareContainer = new JDBCAwareContainer(sourceConfiguration.getJdbcConfiguration());
+    preparedStatementJDBCAwareContainer =
+        new PreparedStatementJDBCAwareContainer(sourceConfiguration.getJdbcQueryConfiguration());
     try {
-      resultSet = jdbcAwareContainer.getPreparedStatement().executeQuery();
+      resultSet = preparedStatementJDBCAwareContainer.getPreparedStatement().executeQuery();
     } catch (SQLException e) {
       throw (new RuntimeException("Error preparing resultset", e));
     }
@@ -26,23 +24,21 @@ public class JDBCSource extends AbstractSource<Object[], JDBCSourceConfiguration
 
   public void close() throws Exception {
     closeResultSet();
-    jdbcAwareContainer.close();
+    preparedStatementJDBCAwareContainer.close();
   }
 
-  protected void closeResultSet() {
+  protected void closeResultSet() throws SQLException {
     if (resultSet != null) {
-      try {
-        resultSet.close();
-      } catch (Exception e) {
-        LOGGER.warn("error closing resultset.", e);
-      }
+
+      resultSet.close();
     }
   }
 
   @Override
   public Iterator<Object[]> iterator() {
     try {
-      return new JDBCIterator(jdbcAwareContainer.getConnection(), sourceConfiguration);
+      return new JDBCIterator(
+          preparedStatementJDBCAwareContainer.getConnection(), sourceConfiguration);
     } catch (SQLException e) {
       throw (new RuntimeException("Error initializing iterator", e));
     }

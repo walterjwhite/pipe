@@ -1,0 +1,5 @@
+group = 'com.walterjwhite.modules.pipe.modules'
+description = 'data-pipe - modules - csv'
+dependencies {
+  compile project(':infrastructure:datastore:modules:csv:impl')
+}

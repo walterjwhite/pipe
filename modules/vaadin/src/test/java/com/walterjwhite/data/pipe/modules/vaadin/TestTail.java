@@ -2,14 +2,10 @@ package com.walterjwhite.data.pipe.modules.vaadin;
 
 import com.google.inject.Injector;
 import com.walterjwhite.data.pipe.api.DataPipeConfiguration;
-import com.walterjwhite.data.pipe.impl.DataPipeModule;
-import com.walterjwhite.data.pipe.modules.csv.CSVDataPipeModule;
 import com.walterjwhite.data.pipe.modules.csv.model.CSVConfiguration;
 import com.walterjwhite.data.pipe.modules.csv.model.CSVSourceConfiguration;
 import com.walterjwhite.google.guice.GuiceHelper;
-import com.walterjwhite.google.guice.property.test.GuiceTestModule;
 import com.walterjwhite.vaadin.data.pipe.VaadinDataSinkConfiguration;
-import com.walterjwhite.vaadin.data.pipe.VaadinModule;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,9 +19,9 @@ public class TestTail {
 
   @Before
   public void onBefore() {
-    GuiceHelper.addModules(
-        new GuiceTestModule(), new DataPipeModule(), new CSVDataPipeModule(), new VaadinModule());
-    injector = GuiceHelper.getGuiceInjector();
+    GuiceHelper.addModules(new VaadinTestModule(getClass()));
+
+    injector = GuiceHelper.getGuiceApplicationInjector();
   }
 
   @After

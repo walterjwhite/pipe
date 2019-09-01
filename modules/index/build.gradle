@@ -1,0 +1,6 @@
+group = 'com.walterjwhite.modules.pipe.modules'
+description = 'data-pipe - modules - index'
+dependencies {
+  compile project(':infrastructure:datastore:modules:index:api')
+  runtime project(':infrastructure:datastore:modules:index:impl')
+}

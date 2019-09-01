@@ -6,12 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Callable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class DatabaseTableCopierCallable implements Callable<Void> {
-  private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseTableCopierCallable.class);
-
   protected final TableCopy tableCopy;
 
   public DatabaseTableCopierCallable(TableCopy tableCopy) {
@@ -23,10 +19,6 @@ public class DatabaseTableCopierCallable implements Callable<Void> {
   public Void call() throws Exception {
     try (final Connection sourceConnection = getSourceConnection()) {
       final List<Column> columns = printColumnNames(sourceConnection);
-
-      for (final Column column : columns) {
-        LOGGER.info("column:" + column);
-      }
 
       try (final Connection targetConnection = getTargetConnection()) {
         createTable(targetConnection, columns);
@@ -41,13 +33,13 @@ public class DatabaseTableCopierCallable implements Callable<Void> {
 
     if (tableCopy.getDatabaseCopySession().getSourceConfiguration().getProperties() != null) {
       return (DriverManager.getConnection(
-          tableCopy.getDatabaseCopySession().getSourceConfiguration().getUri(),
+          tableCopy.getDatabaseCopySession().getSourceConfiguration().getJdbcUrl(),
           getProperties(
               tableCopy.getDatabaseCopySession().getSourceConfiguration().getProperties())));
     }
 
     return (DriverManager.getConnection(
-        tableCopy.getDatabaseCopySession().getSourceConfiguration().getUri(),
+        tableCopy.getDatabaseCopySession().getSourceConfiguration().getJdbcUrl(),
         tableCopy.getDatabaseCopySession().getSourceConfiguration().getUsername(),
         tableCopy.getDatabaseCopySession().getSourceConfiguration().getPassword()));
   }
@@ -62,9 +54,13 @@ public class DatabaseTableCopierCallable implements Callable<Void> {
     try (final ResultSet sourceTableResultSet =
         databaseMetaData.getTables(null, null, null, new String[] {"TABLE"})) {
       while (sourceTableResultSet.next()) {
-        LOGGER.debug("table:" + sourceTableResultSet.getString("TABLE_NAME"));
+        printTable(sourceTableResultSet);
       }
     }
+  }
+
+  protected void printTable(final ResultSet sourceTableResultSet) {
+    // LOGGER.debug("table:" + sourceTableResultSet.getString("TABLE_NAME"));
   }
 
   protected List<Column> printColumnNames(Connection sourceConnection) throws SQLException {

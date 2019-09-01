@@ -17,13 +17,9 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /** Read-only scrolling view of data */
 public class JavaFXDataSink extends AbstractSink<Object[], JavaFXDataSinkConfiguration> {
-  private static final Logger LOGGER = LoggerFactory.getLogger(JavaFXDataSink.class);
-
   protected TableView tableView;
 
   protected final ObservableList<Map<String, String>> uiData = FXCollections.observableArrayList();
@@ -62,7 +58,7 @@ public class JavaFXDataSink extends AbstractSink<Object[], JavaFXDataSinkConfigu
     final DoubleProperty height = new SimpleDoubleProperty();
     height.setValue(sinkConfiguration.getMaxRows() * tableView.getFixedCellSize() + 30);
 
-    LOGGER.info("height:" + height);
+    // LOGGER.info("height:" + height);
 
     tableView.prefHeightProperty().bind(height);
 

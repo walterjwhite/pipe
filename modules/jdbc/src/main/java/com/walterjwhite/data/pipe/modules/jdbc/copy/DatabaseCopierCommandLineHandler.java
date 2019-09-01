@@ -17,7 +17,7 @@
 //
 //  private static void copyDatabase(final String argument) throws IOException {
 //    SerializationService serializationService =
-//        GuiceHelper.getGuiceInjector().getInstance(SerializationService.class);
+//        GuiceHelper.getGuiceApplicationInjector().getInstance(SerializationService.class);
 //    DatabaseCopySession databaseCopySession =
 //        (DatabaseCopySession)
 //            serializationService.deserialize(
@@ -29,7 +29,7 @@
 //  }
 //
 //  private static void copyTable(DatabaseCopySession databaseCopySession, final String tableName) {
-//    GuiceHelper.getGuiceInjector()
+//    GuiceHelper.getGuiceApplicationInjector()
 //        .getInstance(ExecutorService.class)
 //        .submit(
 //            new DatabaseTableCopierCallable(

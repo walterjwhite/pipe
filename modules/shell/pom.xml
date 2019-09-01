@@ -1,137 +1,64 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <parent>
-        <groupId>com.walterjwhite.modules.pipe</groupId>
-        <artifactId>modules</artifactId>
-        <version>0.0.15-SNAPSHOT</version>
-    </parent>
-
-    <groupId>com.walterjwhite.modules.pipe.modules</groupId>
-    <artifactId>shell</artifactId>
-    <packaging>jar</packaging>
-
-    <name>data-pipe - modules - shell</name>
-
-    <dependencies>
-        <!--<dependency>-->
-        <!--<groupId>com.walterjwhite.infrastructure.google-guice.modules</groupId>-->
-        <!--<artifactId>cli</artifactId>-->
-        <!--<version>0.0.15-SNAPSHOT</version>-->
-        <!--</dependency>-->
-
-        <dependency>
-            <groupId>com.walterjwhite.modules.shell.api</groupId>
-            <artifactId>service</artifactId>
-            <version>0.0.15-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.walterjwhite.modules.shell</groupId>
-            <artifactId>impl</artifactId>
-            <version>0.0.15-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.walterjwhite.infrastructure.google-guice.modules</groupId>
-            <artifactId>property-test</artifactId>
-            <version>0.0.15-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.walterjwhite.infrastructure.google-guice.modules</groupId>
-            <artifactId>property-test</artifactId>
-            <version>0.0.15-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.walterjwhite.infrastructure.dependencies</groupId>
-            <artifactId>p6spy</artifactId>
-            <version>0.0.15-SNAPSHOT</version>
-            <type>pom</type>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.walterjwhite.infrastructure.dependencies</groupId>
-            <artifactId>h2</artifactId>
-            <version>0.0.15-SNAPSHOT</version>
-            <type>pom</type>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.walterjwhite.infrastructure.dependencies</groupId>
-            <artifactId>hikari-jdbc-connection-pool</artifactId>
-            <version>0.0.15-SNAPSHOT</version>
-            <type>pom</type>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.walterjwhite.infrastructure.dependencies</groupId>
-            <artifactId>hibernate-hikari</artifactId>
-            <version>0.0.15-SNAPSHOT</version>
-            <type>pom</type>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
-    <!--<build>-->
-        <!--<plugins>-->
-            <!--<plugin>-->
-                <!--<groupId>org.codehaus.gmavenplus</groupId>-->
-                <!--<artifactId>gmavenplus-plugin</artifactId>-->
-                <!--<version>1.6</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--&lt;!&ndash;<phase>generate-resources</phase>&ndash;&gt;-->
-                        <!--<phase>prepare-package</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>execute</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-                <!--<configuration>-->
-                    <!--<scripts>-->
-                        <!--<script><![CDATA[-->
-            <!--new org.reflections.Reflections(-->
-			<!--"com.walterjwhite",-->
-			<!--org.reflections.scanners.TypeAnnotationsScanner.class,-->
-			<!--org.reflections.scanners.SubTypesScanner.class,-->
-			<!--org.reflections.scanners.FieldAnnotationsScanner.class-->
-			<!--)-->
-			<!--.save("${project.build.outputDirectory}/META-INF/reflections/${project.groupId}-${project.artifactId}-reflections.xml")-->
-          <!--]]></script>-->
-                    <!--</scripts>-->
-                <!--</configuration>-->
-                <!--<dependencies>-->
-                    <!--<dependency>-->
-                        <!--<groupId>org.codehaus.groovy</groupId>-->
-                        <!--<artifactId>groovy-all</artifactId>-->
-                        <!--&lt;!&ndash; any version of Groovy \>= 1.5.0 should work here &ndash;&gt;-->
-                        <!--<version>2.4.12</version>-->
-                        <!--<scope>runtime</scope>-->
-                    <!--</dependency>-->
-
-                    <!--<dependency>-->
-                        <!--<groupId>org.reflections</groupId>-->
-                        <!--<artifactId>reflections</artifactId>-->
-                        <!--<version>0.9.11</version>-->
-                    <!--</dependency>-->
-
-                    <!--&lt;!&ndash; When writing XML, this is required &ndash;&gt;-->
-                    <!--<dependency>-->
-                        <!--<groupId>dom4j</groupId>-->
-                        <!--<artifactId>dom4j</artifactId>-->
-                        <!--<version>1.6.1</version>-->
-                    <!--</dependency>-->
-                <!--</dependencies>-->
-            <!--</plugin>-->
-        <!--</plugins>-->
-    <!--</build>-->
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.walterjwhite.java.modules.pipe</groupId>
+    <artifactId>modules</artifactId>
+    <version>0.0.15-SNAPSHOT</version>
+  </parent>
+  <groupId>com.walterjwhite.java.modules.pipe.modules</groupId>
+  <artifactId>shell</artifactId>
+  <packaging>jar</packaging>
+  <name>data-pipe - modules - shell</name>
+  <dependencies>
+    <!--<dependency>-->
+    <!--<groupId>com.walterjwhite.java.infrastructure.google-guice.modules</groupId>-->
+    <!--<artifactId>cli</artifactId>-->
+    <!--<version>0.0.15-SNAPSHOT</version>-->
+    <!--</dependency>-->
+    <dependency>
+      <groupId>com.walterjwhite.java.modules.shell.api</groupId>
+      <artifactId>service</artifactId>
+      <version>0.0.15-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.walterjwhite.java.modules.shell</groupId>
+      <artifactId>impl</artifactId>
+      <version>0.0.15-SNAPSHOT</version>
+    </dependency>
+    <!--<dependency>-->
+    <!--<groupId>com.walterjwhite.java.infrastructure.google-guice.modules</groupId>-->
+    <!--<artifactId>property-test</artifactId>-->
+    <!--<version>0.0.15-SNAPSHOT</version>-->
+    <!--<scope>test</scope>-->
+    <!--</dependency>-->
+    <dependency>
+      <groupId>com.walterjwhite.java.dependencies</groupId>
+      <artifactId>p6spy</artifactId>
+      <version>0.0.15-SNAPSHOT</version>
+      <type>pom</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.walterjwhite.java.dependencies</groupId>
+      <artifactId>h2</artifactId>
+      <version>0.0.15-SNAPSHOT</version>
+      <type>pom</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.walterjwhite.java.dependencies</groupId>
+      <artifactId>hikari-jdbc-connection-pool</artifactId>
+      <version>0.0.15-SNAPSHOT</version>
+      <type>pom</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.walterjwhite.java.dependencies</groupId>
+      <artifactId>hibernate-hikari</artifactId>
+      <version>0.0.15-SNAPSHOT</version>
+      <type>pom</type>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>

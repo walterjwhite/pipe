@@ -1,8 +1,8 @@
 package com.walterjwhite.data.pipe.modules.cli;
 
-import com.walterjwhite.google.guice.cli.property.OperatingMode;
-import com.walterjwhite.google.guice.cli.service.AbstractCommandLineHandler;
-import com.walterjwhite.google.guice.property.property.DefaultValue;
+import com.walterjwhite.inject.cli.property.OperatingMode;
+import com.walterjwhite.inject.cli.service.AbstractCommandLineHandler;
+import com.walterjwhite.property.api.annotation.DefaultValue;
 
 public enum PipeOperatingMode implements OperatingMode {
   @DefaultValue

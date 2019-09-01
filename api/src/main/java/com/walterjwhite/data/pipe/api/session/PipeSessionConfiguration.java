@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+// @PersistenceCapable
 @Entity
 public class PipeSessionConfiguration extends AbstractNamedEntity {
   @OneToMany
@@ -22,13 +27,5 @@ public class PipeSessionConfiguration extends AbstractNamedEntity {
       String name, String description, List<PipeSessionGroupConfiguration> groups) {
     super(name, description);
     if (groups != null && !groups.isEmpty()) this.groups.addAll(groups);
-  }
-
-  public List<PipeSessionGroupConfiguration> getGroups() {
-    return groups;
-  }
-
-  public void setGroups(List<PipeSessionGroupConfiguration> groups) {
-    this.groups = groups;
   }
 }

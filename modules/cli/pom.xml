@@ -1,44 +1,36 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <parent>
-        <groupId>com.walterjwhite.modules.pipe</groupId>
-        <artifactId>modules</artifactId>
-        <version>0.0.15-SNAPSHOT</version>
-    </parent>
-
-    <groupId>com.walterjwhite.modules.pipe.modules</groupId>
-    <artifactId>cli</artifactId>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.walterjwhite.java.modules.pipe</groupId>
+    <artifactId>modules</artifactId>
     <version>0.0.15-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
-    <name>data-pipe - modules - cli</name>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.walterjwhite.infrastructure.google-guice.modules</groupId>
-            <artifactId>cli</artifactId>
-            <version>0.0.15-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.walterjwhite.modules.pipe.modules</groupId>
-            <artifactId>csv</artifactId>
-            <version>0.0.15-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.walterjwhite.modules.csv.modules</groupId>
-            <artifactId>apache-commons-csv</artifactId>
-            <version>0.0.15-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.walterjwhite.modules.serialization.modules</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>0.0.15-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
+  </parent>
+  <groupId>com.walterjwhite.java.modules.pipe.modules</groupId>
+  <artifactId>cli</artifactId>
+  <version>0.0.15-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>data-pipe - modules - cli</name>
+  <dependencies>
+    <dependency>
+      <groupId>com.walterjwhite.java.infrastructure.inject.modules.cli</groupId>
+      <artifactId>api</artifactId>
+      <version>0.0.15-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.walterjwhite.java.modules.pipe.modules</groupId>
+      <artifactId>csv</artifactId>
+      <version>0.0.15-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.walterjwhite.java.modules.csv.modules.apache-commons-csv</groupId>
+      <artifactId>impl</artifactId>
+      <version>0.0.15-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.walterjwhite.java.modules.serialization.modules.snakeyaml</groupId>
+      <artifactId>impl</artifactId>
+      <version>0.0.15-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
 </project>

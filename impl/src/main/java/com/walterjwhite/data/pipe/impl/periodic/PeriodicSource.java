@@ -5,7 +5,7 @@ import com.google.common.util.concurrent.ListeningScheduledExecutorService;
 import com.walterjwhite.data.pipe.api.source.Source;
 import com.walterjwhite.data.pipe.impl.AbstractSource;
 import com.walterjwhite.data.pipe.impl.QueueIterator;
-import com.walterjwhite.google.guice.GuiceHelper;
+import com.walterjwhite.infrastructure.inject.core.helper.ApplicationHelper;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -53,7 +53,8 @@ public class PeriodicSource<SourceRecordType extends Serializable>
   @Override
   protected void doConfigure() {
     source =
-        GuiceHelper.getGuiceInjector()
+        ApplicationHelper.getApplicationInstance()
+            .getInjector()
             .getInstance(sourceConfiguration.getSourceConfiguration().getSourceClass());
 
     future =

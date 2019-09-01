@@ -1,0 +1,5 @@
+group = 'com.walterjwhite.modules.pipe.modules'
+description = 'data-pipe - modules - file'
+dependencies {
+  compile project(':infrastructure:dependencies:commons-io')
+}

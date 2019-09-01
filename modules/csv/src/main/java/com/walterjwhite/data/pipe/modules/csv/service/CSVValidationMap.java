@@ -5,12 +5,9 @@ import com.walterjwhite.csv.api.service.reader.CSVReaderProducer;
 import com.walterjwhite.csv.impl.service.CSVRecordCounter;
 import java.io.*;
 import java.util.function.Function;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+// TODO: this is a plugin and should live outside of this project
 public class CSVValidationMap implements Function<CSVValidation, Long> {
-  private static final Logger LOGGER = LoggerFactory.getLogger(CSVValidationMap.class);
-
   protected final CSVReaderProducer csvReaderProducer;
   protected final CSVRecordCounter csvRecordCounter;
 
@@ -55,7 +52,8 @@ public class CSVValidationMap implements Function<CSVValidation, Long> {
 
   protected int countTargetFile(final File targetCSVFile) throws IOException {
     final CSVReader csvReader =
-        csvReaderProducer.get(new InputStreamReader(new FileInputStream(targetCSVFile)));
+        csvReaderProducer.get(
+            new InputStreamReader(new BufferedInputStream(new FileInputStream(targetCSVFile))));
 
     return (csvRecordCounter.count(csvReader));
   }

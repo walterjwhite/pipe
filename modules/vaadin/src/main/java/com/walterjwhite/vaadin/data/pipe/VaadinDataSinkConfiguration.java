@@ -3,7 +3,11 @@ package com.walterjwhite.vaadin.data.pipe;
 import com.walterjwhite.data.pipe.api.source.AbstractSinkConfiguration;
 import java.util.Arrays;
 import java.util.Objects;
+import lombok.Data;
+import lombok.ToString;
 
+@Data
+@ToString(doNotUseGetters = true)
 public class VaadinDataSinkConfiguration extends AbstractSinkConfiguration {
   protected int maxRows;
   protected String dataClassName;
@@ -29,46 +33,6 @@ public class VaadinDataSinkConfiguration extends AbstractSinkConfiguration {
 
   public VaadinDataSinkConfiguration() {
     super(VaadinDataSink.class);
-  }
-
-  public int getMaxRows() {
-    return maxRows;
-  }
-
-  public void setMaxRows(int maxRows) {
-    this.maxRows = maxRows;
-  }
-
-  public String getDataClassName() {
-    return dataClassName;
-  }
-
-  public void setDataClassName(String dataClassName) {
-    this.dataClassName = dataClassName;
-  }
-
-  public String[] getColumnNames() {
-    return columnNames;
-  }
-
-  public void setColumnNames(String[] columnNames) {
-    this.columnNames = columnNames;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
   }
 
   @Override

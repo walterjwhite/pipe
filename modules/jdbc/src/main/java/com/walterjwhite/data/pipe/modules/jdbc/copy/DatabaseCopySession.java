@@ -4,11 +4,17 @@ import com.walterjwhite.datastore.api.model.entity.AbstractNamedEntity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@Data
+@ToString(doNotUseGetters = true)
+@NoArgsConstructor
 public class DatabaseCopySession extends AbstractNamedEntity {
 
-  protected JDBCConfiguration sourceConfiguration;
-  protected JDBCConfiguration targetConfiguration;
+  protected JDBCQueryConfiguration sourceConfiguration;
+  protected JDBCQueryConfiguration targetConfiguration;
 
   protected boolean nop;
 
@@ -20,8 +26,8 @@ public class DatabaseCopySession extends AbstractNamedEntity {
   public DatabaseCopySession(
       String name,
       String description,
-      JDBCConfiguration sourceConfiguration,
-      JDBCConfiguration targetConfiguration,
+      JDBCQueryConfiguration sourceConfiguration,
+      JDBCQueryConfiguration targetConfiguration,
       boolean nop,
       LocalDateTime startDateTime,
       LocalDateTime endDateTime) {
@@ -31,57 +37,5 @@ public class DatabaseCopySession extends AbstractNamedEntity {
     this.nop = nop;
     this.startDateTime = startDateTime;
     this.endDateTime = endDateTime;
-  }
-
-  public DatabaseCopySession() {
-    super();
-  }
-
-  public JDBCConfiguration getSourceConfiguration() {
-    return sourceConfiguration;
-  }
-
-  public void setSourceConfiguration(JDBCConfiguration sourceConfiguration) {
-    this.sourceConfiguration = sourceConfiguration;
-  }
-
-  public JDBCConfiguration getTargetConfiguration() {
-    return targetConfiguration;
-  }
-
-  public void setTargetConfiguration(JDBCConfiguration targetConfiguration) {
-    this.targetConfiguration = targetConfiguration;
-  }
-
-  public boolean isNop() {
-    return nop;
-  }
-
-  public void setNop(boolean nop) {
-    this.nop = nop;
-  }
-
-  public LocalDateTime getStartDateTime() {
-    return startDateTime;
-  }
-
-  public void setStartDateTime(LocalDateTime startDateTime) {
-    this.startDateTime = startDateTime;
-  }
-
-  public LocalDateTime getEndDateTime() {
-    return endDateTime;
-  }
-
-  public void setEndDateTime(LocalDateTime endDateTime) {
-    this.endDateTime = endDateTime;
-  }
-
-  public List<String> getTableNames() {
-    return tableNames;
-  }
-
-  public void setTableNames(List<String> tableNames) {
-    this.tableNames = tableNames;
   }
 }

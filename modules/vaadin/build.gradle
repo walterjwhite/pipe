@@ -1,0 +1,9 @@
+group = 'com.walterjwhite.modules.pipe.modules'
+description = 'vaadin - modules - vaadin'
+dependencies {
+  compile project(':infrastructure:dependencies:vaadin')
+  compile project(':infrastructure:dependencies:google-guava')
+    compile group: 'com.bsb.common.vaadin', name: 'com.bsb.common.vaadin.embed', version:'0.5'
+  testCompile project(':infrastructure:datastore:modules:csv')
+  testCompile project(':infrastructure:datastore:modules:property-test')
+}

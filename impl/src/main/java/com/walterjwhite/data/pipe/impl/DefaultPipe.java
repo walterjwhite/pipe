@@ -1,22 +1,19 @@
 package com.walterjwhite.data.pipe.impl;
 
-import com.walterjwhite.data.pipe.api.*;
+import com.walterjwhite.data.pipe.api.DataPipeConfiguration;
+import com.walterjwhite.data.pipe.api.Pipe;
 import com.walterjwhite.data.pipe.api.session.PipeSessionConfiguration;
 import com.walterjwhite.data.pipe.api.session.PipeSessionGroupConfiguration;
 import com.walterjwhite.data.pipe.api.sink.AbstractSourceConfiguration;
 import com.walterjwhite.data.pipe.api.source.Source;
-import com.walterjwhite.google.guice.GuiceHelper;
+import com.walterjwhite.infrastructure.inject.core.helper.ApplicationHelper;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Spliterators;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class DefaultPipe implements Pipe {
-  private static final Logger LOGGER = LoggerFactory.getLogger(DefaultPipe.class);
-
   protected final DataPipeConfiguration dataPipeConfiguration;
   protected final PipeSessionGroupConfiguration pipeSessionGroupConfiguration;
   protected final PipeSessionConfiguration pipeSessionConfiguration;
@@ -40,7 +37,9 @@ public class DefaultPipe implements Pipe {
     for (final AbstractSourceConfiguration sourceConfiguration :
         dataPipeConfiguration.getSourceConfigurations()) {
       Source source =
-          GuiceHelper.getGuiceInjector().getInstance(sourceConfiguration.getSourceClass());
+          ApplicationHelper.getApplicationInstance()
+              .getInjector()
+              .getInstance(sourceConfiguration.getSourceClass());
       source.configure(sourceConfiguration);
       sources.add(source);
 

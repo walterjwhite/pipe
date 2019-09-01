@@ -5,13 +5,9 @@ import com.google.common.collect.EvictingQueue;
 import com.vaadin.ui.*;
 import com.walterjwhite.data.pipe.impl.AbstractSink;
 import java.util.Queue;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /** Read-only scrolling view of data */
 public class VaadinDataSink extends AbstractSink<Object[], VaadinDataSinkConfiguration> {
-  private static final Logger LOGGER = LoggerFactory.getLogger(VaadinDataSink.class);
-
   protected Class dataClass;
   protected Grid grid;
 
@@ -61,7 +57,6 @@ public class VaadinDataSink extends AbstractSink<Object[], VaadinDataSinkConfigu
   //  public void updateGrid() {
   //    final List<? extends AbstractEntity> entities =
   // repositoryProvider.get().findAll(entityClass);
-  //    LOGGER.info("found:" + entities);
   //    grid.setItems((List) entities);
   //  }
 

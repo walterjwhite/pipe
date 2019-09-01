@@ -1,8 +1,9 @@
 package com.walterjwhite.data.pipe.modules.cli;
 
 import com.walterjwhite.data.pipe.api.session.PipeSessionConfiguration;
-import com.walterjwhite.google.guice.cli.service.AbstractCommandLineHandler;
+import com.walterjwhite.inject.cli.service.AbstractCommandLineHandler;
 import com.walterjwhite.serialization.modules.snakeyaml.SnakeyamlSerializationService;
+import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,12 +20,13 @@ public class PipeCommandLineHandler extends AbstractCommandLineHandler {
   }
 
   @Override
-  public void run(String... arguments) throws Exception {
+  protected void doRun(String... arguments) throws Exception {
     for (final String argument : arguments) {
       PipeSessionConfiguration pipeSessionConfiguration =
           (PipeSessionConfiguration)
               serializationService.deserialize(
-                  new FileInputStream(argument), PipeSessionConfiguration.class);
+                  new BufferedInputStream(new FileInputStream(argument)),
+                  PipeSessionConfiguration.class);
       final PipeSessionInstance pipeSessionInstance =
           new PipeSessionInstance(pipeSessionConfiguration);
       pipeSessionInstances.add(pipeSessionInstance);
@@ -34,10 +36,10 @@ public class PipeCommandLineHandler extends AbstractCommandLineHandler {
   }
 
   @Override
-  protected void onShutdown() throws Exception {
+  public void interrupt() {
     for (final PipeSessionInstance pipeSessionInstance : pipeSessionInstances)
       pipeSessionInstance.stop();
 
-    super.onShutdown();
+    super.interrupt();
   }
 }
