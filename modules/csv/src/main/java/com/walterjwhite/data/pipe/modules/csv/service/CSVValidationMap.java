@@ -44,7 +44,7 @@ public class CSVValidationMap implements Function<CSVValidation, Long> {
   //        }
   //    }
 
-  /** TODO: handle compressed files */
+  // TODO: handle compressed files
   protected File getTargetFile(final File csvCountFile, final String name) {
     return (new File(
         csvCountFile.getParentFile().getAbsolutePath() + File.separator + name + ".csv"));
