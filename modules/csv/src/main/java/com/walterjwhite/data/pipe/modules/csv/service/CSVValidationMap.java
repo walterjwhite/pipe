@@ -23,7 +23,7 @@ public class CSVValidationMap implements Function<CSVValidation, Long> {
       return Long.valueOf(countTargetFile(new File(csvValidation.getFilenameKey())));
 
     } catch (IOException e) {
-      throw (new RuntimeException("Error validating counts", e));
+      throw new RuntimeException("Error validating counts", e);
     }
   }
 

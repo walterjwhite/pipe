@@ -20,7 +20,7 @@ public class QueueIterator implements Iterator {
     try {
       return queue.take();
     } catch (InterruptedException e) {
-      throw (new RuntimeException("Error retrieving next element", e));
+      throw new RuntimeException("Error retrieving next element", e);
     }
   }
 }

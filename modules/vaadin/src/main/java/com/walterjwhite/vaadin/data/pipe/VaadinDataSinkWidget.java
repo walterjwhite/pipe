@@ -43,7 +43,7 @@
 //    try {
 //      startServer();
 //    } catch (Exception e) {
-//      throw (new RuntimeException("Error starting vaadin server", e));
+//      throw new RuntimeException("Error starting vaadin server", e));
 //    }
 //  }
 //

@@ -23,7 +23,7 @@ public class ShellSink extends AbstractSink<String, ShellSinkConfiguration> {
     try {
       shellExecutionService.run(new ShellCommand().withCommandLine(record));
     } catch (Exception e) {
-      throw (new RuntimeException("Error running command", e));
+      throw new RuntimeException("Error running command", e);
     }
   }
 

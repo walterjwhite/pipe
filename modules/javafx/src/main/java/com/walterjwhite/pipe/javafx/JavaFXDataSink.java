@@ -31,7 +31,7 @@ public class JavaFXDataSink extends AbstractSink<Object[], JavaFXDataSinkConfigu
     try {
       JavaFXApplication.initialize();
     } catch (InterruptedException e) {
-      throw (new RuntimeException("Error initializing JavaFX environment", e));
+      throw new RuntimeException("Error initializing JavaFX environment", e);
     }
 
     final Label label = new Label(sinkConfiguration.getTitle());

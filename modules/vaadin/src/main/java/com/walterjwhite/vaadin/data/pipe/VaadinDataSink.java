@@ -24,7 +24,7 @@ public class VaadinDataSink extends AbstractSink<Object[], VaadinDataSinkConfigu
     //    try {
     //      this.dataClass = Class.forName(sinkConfiguration.getDataClassName());
     //    } catch (ClassNotFoundException e) {
-    //      throw (new RuntimeException("Error configuring", e));
+    //      throw new RuntimeException("Error configuring", e));
     //    }
 
     this.grid = new Grid();

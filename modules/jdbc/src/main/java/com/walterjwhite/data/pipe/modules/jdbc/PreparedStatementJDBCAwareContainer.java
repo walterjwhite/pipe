@@ -20,7 +20,7 @@ public class PreparedStatementJDBCAwareContainer extends JDBCAwareContainer {
 
       setQueryParameters(jdbcQueryConfiguration);
     } catch (Exception e) {
-      throw (new RuntimeException("Error configuring", e));
+      throw new RuntimeException("Error configuring", e);
     }
   }
 
@@ -39,7 +39,7 @@ public class PreparedStatementJDBCAwareContainer extends JDBCAwareContainer {
           this.preparedStatement.setDouble(i + 1, (Double) argument);
         //        else if(argument instanceof LocalDate)
         //          this.preparedStatement.setDate(i + 1, ((LocalDate)argument).);
-        else throw (new IllegalArgumentException(argument.getClass() + " is unsupported"));
+        else throw new IllegalArgumentException(argument.getClass() + " is unsupported");
       }
     }
   }

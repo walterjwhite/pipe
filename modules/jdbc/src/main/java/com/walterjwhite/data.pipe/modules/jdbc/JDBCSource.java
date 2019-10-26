@@ -18,7 +18,7 @@ public class JDBCSource extends AbstractSource<Object[], JDBCSourceConfiguration
     try {
       resultSet = preparedStatementJDBCAwareContainer.getPreparedStatement().executeQuery();
     } catch (SQLException e) {
-      throw (new RuntimeException("Error preparing resultset", e));
+      throw new RuntimeException("Error preparing resultset", e);
     }
   }
 
@@ -40,7 +40,7 @@ public class JDBCSource extends AbstractSource<Object[], JDBCSourceConfiguration
       return new JDBCIterator(
           preparedStatementJDBCAwareContainer.getConnection(), sourceConfiguration);
     } catch (SQLException e) {
-      throw (new RuntimeException("Error initializing iterator", e));
+      throw new RuntimeException("Error initializing iterator", e);
     }
   }
 }

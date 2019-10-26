@@ -23,7 +23,7 @@ public class IndexSink extends AbstractSink<IndexableRecord, IndexSinkConfigurat
     try {
       indexService.index(indexableRecord);
     } catch (Exception e) {
-      throw (new RuntimeException("Error indexing data", e));
+      throw new RuntimeException("Error indexing data", e);
     }
   }
 

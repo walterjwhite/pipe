@@ -14,7 +14,7 @@ public class FileSource extends AbstractSource<String, FileSourceConfiguration> 
     try {
       bufferedReader = new BufferedReader(new FileReader(sourceConfiguration.getPath()));
     } catch (FileNotFoundException e) {
-      throw (new RuntimeException("Error initializing file source", e));
+      throw new RuntimeException("Error initializing file source", e);
     }
   }
 

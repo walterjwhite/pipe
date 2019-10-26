@@ -34,7 +34,7 @@ public class JDBCIterator implements Iterator<Object[]>, AutoCloseable {
     try {
       return resultSet.next();
     } catch (SQLException e) {
-      throw (new RuntimeException("Error checking if there were more results"));
+      throw new RuntimeException("Error checking if there were more results");
     }
   }
 
@@ -47,7 +47,7 @@ public class JDBCIterator implements Iterator<Object[]>, AutoCloseable {
       try {
         record[i] = resultSet.getObject(i);
       } catch (SQLException e) {
-        throw (new RuntimeException("Error retrieving", e));
+        throw new RuntimeException("Error retrieving", e);
       }
     }
 

@@ -31,7 +31,7 @@ public class ShellSource extends AbstractSource<String, ShellSourceConfiguration
       // TODO: should I re-add the collector here or further up the ladder?
       shellExecutionService.run(shellCommand /*, shellOutputCollector*/);
     } catch (Exception e) {
-      throw (new RuntimeException("error running command", e));
+      throw new RuntimeException("error running command", e);
     }
   }
 

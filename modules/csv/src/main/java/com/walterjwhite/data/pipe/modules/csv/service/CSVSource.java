@@ -31,7 +31,7 @@ public class CSVSource extends AbstractSource<String[], CSVSourceConfiguration> 
     try {
       csvReader.close();
     } catch (Exception e) {
-      throw (new RuntimeException("Error closing csv source", e));
+      throw new RuntimeException("Error closing csv source", e);
     }
   }
 
@@ -43,7 +43,7 @@ public class CSVSource extends AbstractSource<String[], CSVSourceConfiguration> 
               new FileReader(new File(sourceConfiguration.getCsvConfiguration().getFilename())),
               sourceConfiguration.getCsvConfiguration().getHeaders());
     } catch (IOException e) {
-      throw (new RuntimeException("Error configuring", e));
+      throw new RuntimeException("Error configuring", e);
     }
   }
 }

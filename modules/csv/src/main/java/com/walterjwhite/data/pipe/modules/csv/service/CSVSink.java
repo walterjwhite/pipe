@@ -28,7 +28,7 @@ public class CSVSink extends AbstractSink<String[], CSVSinkConfiguration> {
       // headers should be initialized
       // csvWriter.writeHeaders(null);
     } catch (IOException e) {
-      throw (new RuntimeException("Error configuring", e));
+      throw new RuntimeException("Error configuring", e);
     }
   }
 
@@ -37,7 +37,7 @@ public class CSVSink extends AbstractSink<String[], CSVSinkConfiguration> {
     try {
       csvWriter.writeRecord(record);
     } catch (IOException e) {
-      throw (new RuntimeException("Error writing record to CSV", e));
+      throw new RuntimeException("Error writing record to CSV", e);
     }
   }
 

@@ -30,7 +30,7 @@ public class JDBCSink extends AbstractSink<Object[], JDBCSinkConfiguration> {
           preparedStatementJDBCAwareContainer
               .getPreparedStatement()
               .setDouble(i, (Double) record[i]);
-        else throw (new IllegalArgumentException("unsupported type"));
+        else throw new IllegalArgumentException("unsupported type");
       }
     } catch (SQLException e) {
       // LOGGER.warn("Error setting value", e);
